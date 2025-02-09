@@ -1,7 +1,7 @@
 version: '3'
 services:
   zinc:
-    image: public.ecr.aws/zinclabs/zinc:latest
+    image: public.ecr.aws/zinclabs/zincsearch:latest
     environment:
       - ZINC_FIRST_ADMIN_USER=${ZINC_FIRST_ADMIN_USER}
       - ZINC_FIRST_ADMIN_PASSWORD=${ZINC_FIRST_ADMIN_PASSWORD}
