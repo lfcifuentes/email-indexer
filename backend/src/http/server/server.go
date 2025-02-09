@@ -6,6 +6,7 @@ import (
 	"log"
 	"log/slog"
 	"net/http"
+	_ "net/http/pprof"
 	"os"
 	"os/signal"
 	"syscall"
@@ -58,6 +59,11 @@ func StartServer() {
 		zinc_server,
 		emailServices,
 	)
+	// Start pprof server
+	go func() {
+		slog.Info("Starting pprof server", "port", "6060")
+		log.Println(http.ListenAndServe("localhost:6060", nil))
+	}()
 
 	server := http.Server{
 		Addr:    "0.0.0.0:" + config.HttpPort,

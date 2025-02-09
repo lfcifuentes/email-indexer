@@ -15,6 +15,9 @@
 `ZINC_FIRST_ADMIN_PASSWORD` Clave par el administrador de Zinc Search \
 
 ## BACKEND ENVS
+```
+cd backend
+```
 `APP_NAME` Nombre del api para la documentacion \
 `VERSION` Version del api para la documentacion \
 `HTTP_PORT` Puerto para el api \
@@ -24,7 +27,7 @@
 `ACCEPTED_DOMAINS` Listado de dominios para las CORS \
 
 
-### Build docker image
+## Build docker image
 
 ```shell
 docker-compose up -d
@@ -49,3 +52,10 @@ go test  ./... -coverprofile=coverage.out
 ```bash
 go tool cover -html=coverage.out
 ```
+
+
+### Pprof
+Captura un perfil de CPU durante 60 segundos
+``` 
+go tool pprof http://localhost:6060/debug/pprof/profile\?seconds\=60
+``` 
