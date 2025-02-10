@@ -8,3 +8,4 @@ enron_mail_20110402
 .DS_Store
 # ignore all .DS_Store files
 **/.DS_Store
+NOTAS.md
