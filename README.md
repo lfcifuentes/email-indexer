@@ -36,7 +36,13 @@ cd front
 | ![Index dark](./images/index_dark.png) | ![Busqueda light](./images/index_light.png) |
 |:------------------------------------------:|:-------------------------------------------:|
 
-| ![Search dark](./images/search_dark.png) | ![Search light](./images/search_light.png) |
+| ![Search dark](./images/search_dark_2.png) | ![Search light](./images/search_light_2.png) |
+|:------------------------------------------:|:-------------------------------------------:|
+
+| ![Search dark](./images/search_dark_3.png) | ![Search light](./images/search_light_3.png) |
+|:------------------------------------------:|:-------------------------------------------:|
+
+| ![Search dark](./images/detail_dark.png) | ![Search light](./images/detail_light.png) |
 |:------------------------------------------:|:-------------------------------------------:|
 
 | ![Search Empty dark](./images/search_empty_dark.png) | ![Search Empty light](./images/search_empty_light.png) |
