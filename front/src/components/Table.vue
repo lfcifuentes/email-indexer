@@ -20,9 +20,8 @@
             <th
               scope="row"
               class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              {{ email.message_id }}
-            </th>
+              v-html="highlight(email.message_id)"
+            ></th>
             <td class="px-6 py-4" v-html="highlight(email.from)"></td>
             <td class="px-6 py-4" v-html="highlight(email.to)"></td>
             <td class="px-6 py-4" v-html="highlight(email.subject)"></td>

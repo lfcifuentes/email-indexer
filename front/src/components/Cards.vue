@@ -6,9 +6,10 @@
       class="block p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
     >
       <div class="mb-2">
-        <h2 class="text-lg font-bold whitespace-normal break-words text-gray-900 dark:text-white">
-          {{ email.message_id }}
-        </h2>
+        <h2
+        class="text-lg font-bold whitespace-normal break-words text-gray-900 dark:text-white"
+          v-html="highlight(email.message_id)"
+        ></h2>
       </div>
       <div class="text-sm text-gray-700 dark:text-gray-300">
         <div class="flex items-center gap-2">
