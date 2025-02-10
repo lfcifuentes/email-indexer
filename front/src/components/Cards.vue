@@ -14,17 +14,17 @@
         <div class="flex items-center gap-2">
           <i class="pi pi-user"></i>
           <b>From:</b>
-          <p v-html="highlight(email.from)" class="truncate"></p>
+          <p v-html="highlight(email.from) || '-Sin Registro-'" class="truncate"></p>
         </div>
         <div class="flex items-center gap-2">
           <i class="pi pi-users"></i>
           <b>To:</b>
-          <p v-html="highlight(email.to)" class="truncate"></p>
+          <p v-html="highlight(email.to) || '-Sin Registro-'" class="truncate"></p>
         </div>
         <div class="flex items-center gap-2">
           <i class="pi pi-envelope"></i>
           <b>Subject:</b>
-          <p v-html="highlight(email.subject)" class="truncate"></p>
+          <p v-html="highlight(email.subject) || '-Sin Registro-'" class="truncate"></p>
         </div>
       </div>
       <div class="mt-3 flex items-center justify-between">

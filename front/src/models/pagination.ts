@@ -5,6 +5,7 @@ export interface Meta {
 }
 
 export interface PageLink {
-  label: number | string;
+  index: number | string;
+  label?: number | string;
   active?: boolean;
 }

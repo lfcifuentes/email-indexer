@@ -105,7 +105,7 @@ const closeEmailModal = () => {
       <div class="flex justify-end gap-2">
         <Button
           @click="view = 'list'"
-          class="mt-4 ml-2"
+          class="mt-4 ml-2 cursor-pointer"
           :class="{
             'ring-2 ring-purple-300': view === 'list',
             'opacity-60': view === 'grid'
@@ -116,7 +116,7 @@ const closeEmailModal = () => {
         </Button>
         <Button
           @click="view = 'grid'"
-          class="mt-4"
+          class="mt-4 cursor-pointer"
           :class="{
             'ring-2 ring-purple-300': view === 'grid',
             'opacity-60': view === 'list'
