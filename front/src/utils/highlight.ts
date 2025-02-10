@@ -1,28 +1,29 @@
 /**
- * Escapes special characters in a string to be used in a regular expression.
+ * Escapa caracteres especiales en una cadena para ser usada en una expresión regular.
  *
- * @param str - The string to escape.
- * @returns The escaped string.
+ * @param str - La cadena a escapar.
+ * @returns La cadena escapada.
  */
 const escapeRegExp = (str: string): string => {
-  // Escapa caracteres especiales para usarlos en una expresión regular.
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 };
+
 /**
- * Highlights occurrences of the search terms in the given text by wrapping them in <mark> tags.
+ * Resalta las ocurrencias de los términos de búsqueda en el texto envolviéndolas en etiquetas <mark>.
+ * Ahora se separa el query por espacios y puntos, para resaltar cada parte.
  *
- * @param text - The text in which to highlight search terms.
- * @param search - The search terms to highlight, separated by spaces.
- * @returns The text with highlighted search terms.
+ * @param text - El texto en el que resaltar.
+ * @param search - Los términos de búsqueda a resaltar.
+ * @returns El texto con los términos resaltados.
  */
 export const highlightText = (text: string, search: string): string => {
   if (!search.trim()) {
     return text;
   }
-  // Separa por espacios y elimina entradas vacías.
-  const words = search.trim().split(/\s+/).filter(word => word.length > 0);
-  // Crea un regex que busque cualquiera de las palabras (modo insensible).
+  // Separa por espacios y puntos, eliminando entradas vacías.
+  const words = search.trim().split(/[\s.]+/).filter(word => word.length > 0);
+  // Crea el regex que busca cualquiera de los tokens (modo insensible).
   const regex = new RegExp(`(${words.map(escapeRegExp).join('|')})`, 'gi');
-  // Envuelve cada palabra encontrada en <mark>
+  // Envuelve cada coincidencia en <mark>
   return text.replace(regex, '<mark>$1</mark>');
 };
