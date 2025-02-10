@@ -1,6 +1,8 @@
 package searchapp
 
 import (
+	"strconv"
+
 	emaildomain "github.com/lfcifuentes/email-indexer/backend/src/modules/email/domain"
 	searchdomain "github.com/lfcifuentes/email-indexer/backend/src/modules/search/domain"
 	"github.com/lfcifuentes/email-indexer/backend/src/services/email"
@@ -23,11 +25,23 @@ func NewUseCase(
 }
 
 type SearchResponse struct {
-	Emails []emaildomain.Email `json:"emails"`
-	Total  int                 `json:"total"`
+	Emails   []emaildomain.Email `json:"emails"`
+	Total    int                 `json:"total"`
+	LastPage int                 `json:"last_page"`
 }
 
-func (s SearchUseCases) SearchEmails(query string) (*SearchResponse, error) {
+func (s SearchUseCases) SearchEmails(query string, page string) (*SearchResponse, error) {
+	limit := 20
+	// calculate page start
+	pageStart := 0
+	if page != "" {
+		pageInt, err := strconv.Atoi(page)
+		if err != nil {
+			pageInt = 1
+		}
+		pageStart = (pageInt - 1) * limit
+	}
+
 	request := searchdomain.SearchRequest{
 		SearchType: "matchphrase",
 		Query: searchdomain.BoolQuery{
@@ -41,8 +55,8 @@ func (s SearchUseCases) SearchEmails(query string) (*SearchResponse, error) {
 				},
 			},
 		},
-		From: 0,
-		Size: 20,
+		From: pageStart,
+		Size: limit,
 	}
 	zincResults, err := s.ZincServices.Search(zinc.Index, request)
 	if err != nil {
@@ -55,10 +69,13 @@ func (s SearchUseCases) SearchEmails(query string) (*SearchResponse, error) {
 		tmpEmail.FromMap(source)
 		emails = append(emails, tmpEmail)
 	}
+	// calculate last page
+	lastPage := (zincResults.Hits.Total.Value + limit - 1) / limit
 	// make response
 	response := SearchResponse{
-		Emails: emails,
-		Total:  zincResults.Hits.Total.Value,
+		Emails:   emails,
+		Total:    zincResults.Hits.Total.Value,
+		LastPage: lastPage,
 	}
 	return &response, nil
 }

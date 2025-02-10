@@ -27,7 +27,12 @@ func (h Handler) SearchHandler(w http.ResponseWriter, r *http.Request) {
 		corehttp.SendError(w, r, err)
 		return
 	}
-	emails, err := h.useCases.SearchEmails(query)
+	// Retrieve search criteria from the URL query parameters.
+	page := r.URL.Query().Get("page")
+	if page == "" {
+		page = "1"
+	}
+	emails, err := h.useCases.SearchEmails(query, page)
 	if err != nil {
 		corehttp.SendError(w, r, err)
 		return

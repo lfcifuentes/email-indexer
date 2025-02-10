@@ -5,6 +5,8 @@ services:
     environment:
       - ZINC_FIRST_ADMIN_USER=${ZINC_FIRST_ADMIN_USER}
       - ZINC_FIRST_ADMIN_PASSWORD=${ZINC_FIRST_ADMIN_PASSWORD}
+      - MAX_RESULTS=1000000
+      - ZINC_MAX_RESULTS=1000000
     ports:
       - '4080:4080'
     volumes:
