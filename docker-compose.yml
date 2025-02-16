@@ -29,6 +29,7 @@ services:
       - APP_ENV=development
     ports:
       - '8000:${HTTP_PORT}'
+      - '6060:6060'  # Pprof
     restart: on-failure
     volumes:
       - ./backend:/app

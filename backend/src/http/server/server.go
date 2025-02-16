@@ -68,11 +68,11 @@ func StartServer() {
 	// Start pprof server
 	go func() {
 		slog.Info("Starting pprof server", "port", "6060")
-		log.Println(http.ListenAndServe("localhost:6060", nil))
+		log.Println(http.ListenAndServe(":6060", nil))
 	}()
 
 	server := http.Server{
-		Addr:    "0.0.0.0:" + config.HttpPort,
+		Addr:    ":" + config.HttpPort,
 		Handler: r,
 	}
 

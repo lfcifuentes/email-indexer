@@ -11,4 +11,6 @@ COPY . .
 RUN go build -o ./out/api-email-indexer /api-email-indexer/
 
 EXPOSE ${HTTP_PORT}
+EXPOSE 6060
+
 CMD "./out/api-email-indexer"

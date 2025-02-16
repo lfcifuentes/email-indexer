@@ -108,3 +108,5 @@ go tool pprof http://localhost:6060/debug/pprof/profile\?seconds\=60
 ```
 go tool pprof http://localhost:6060/debug/pprof/trace\?seconds\=60
 ```
+
+go tool pprof http://localhost:6060/debug/pprof/heap?seconds=280
