@@ -8,8 +8,8 @@ import Pagination from '@/components/Pagination.vue';
 import type { Email } from '@/models/email';
 import { getApi } from '@/services/api';
 import { ref } from 'vue';
-import type { PageLink } from '@/models/pagination';
 import EmailModal from '@/components/EmailModal.vue';
+import { toastr } from '@/utils/toastr';
 
 const search = ref('');
 const email = ref<Email>({} as Email);
@@ -48,7 +48,7 @@ const searchHandler = () => {
       }
     })
     .catch(err => {
-      console.log(err)
+      toastr.error(err)
     })
     .finally(() => {
       loading.value = false
@@ -71,22 +71,24 @@ const closeEmailModal = () => {
       class="max-w-md mx-auto">
       <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
       <div class="relative">
-          <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-              <i class="pi pi-search text-gray-400 dark:text-gray-500"></i>
-          </div>
-          <input
-            v-model="search"
-            id="search"
-            type="search"
-            class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Search Email by Subject, Sender, Receiver, etc."
-            required
-          />
-          <Button
-            :loading="loading"
-            type="submit"
-            class="absolute"
-          >Search</button>
+        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <i class="pi pi-search text-gray-400 dark:text-gray-500"></i>
+        </div>
+        <input
+          v-model="search"
+          id="search"
+          type="search"
+          class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Search Email by Subject, Sender, Receiver, etc."
+          required
+        />
+        <Button
+          :loading="loading"
+          type="submit"
+          class="absolute"
+        >
+          Search
+        </button>
       </div>
     </form>
     <!-- email list -->
