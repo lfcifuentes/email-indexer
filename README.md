@@ -3,17 +3,37 @@
 ## Tech Stack
 - [Go 1.23.2](https://tip.golang.org/)
     - [Chi Router](https://github.com/go-chi/chi)
+    - [Swagger](https://github.com/swaggo/swag)
 - [Search Engine](https://github.com/zincsearch/zincsearch)
 - [Vue 3.5.13](https://vuejs.org/)
 - [Docker](https://www.docker.com)
     - [Docker Compose](https://docs.docker.com/compose/)
 
 
+### Instalation
+
+- Download the email data with the `scripts/app.sh` shell
+  script
+
+```sh
+    make dowload_email_data
+```
+
+- Build the docker images and start containers
+
+```sh
+    make start
+```
+
+### Backend Swagger Documentation
+
+http://localhost:8000/swagger/index.html#/
+
 ### APP ENVS
 `ZINC_FIRST_ADMIN_USER` Usuario par el administrador de Zinc Search \
 `ZINC_FIRST_ADMIN_PASSWORD` Clave par el administrador de Zinc Search \
 
-## BACKEND ENVS
+### BACKEND ENVS
 ```
 cd backend
 ```
@@ -23,7 +43,7 @@ cd backend
 `ZINC_SEARCH_API_URL` URL del api de ZincSearch \
 `ZINC_SEARCH_AUTH_USER` admin \
 `ZINC_SEARCH_AUTH_PASS` password \
-`ACCEPTED_DOMAINS` Listado de dominios para las CORS \
+`ACCEPTED_DOMAINS` Listado de dominios para las CORS 
 
 ## FRONTEND ENVS
 ```
@@ -77,7 +97,14 @@ go tool cover -html=coverage.out
 
 
 ### Pprof
+
 Captura un perfil de CPU durante 60 segundos
-``` 
+
+```
 go tool pprof http://localhost:6060/debug/pprof/profile\?seconds\=60
-``` 
+```
+
+
+```
+go tool pprof http://localhost:6060/debug/pprof/trace\?seconds\=60
+```

@@ -19,8 +19,8 @@ type ApiService struct {
 func NewApiService(
 	authUsername string,
 	authPassword string,
-) *ApiService {
-	return &ApiService{
+) ApiServiceAdapter {
+	return ApiService{
 		AuthUsername: authUsername,
 		AuthPassword: authPassword,
 	}
@@ -57,7 +57,7 @@ func NewApiService(
 //	if err != nil {
 //	    // handle error
 //	}
-func (a *ApiService) DoRequestWithOptionalAuth(method, url string, withAuth bool, headers map[string]string, body interface{}) ([]byte, error) {
+func (a ApiService) DoRequestWithOptionalAuth(method, url string, withAuth bool, headers map[string]string, body interface{}) ([]byte, error) {
 	var requestBody []byte
 	var err error
 
@@ -110,34 +110,34 @@ func (a *ApiService) DoRequestWithOptionalAuth(method, url string, withAuth bool
 	return respBody, nil
 }
 
-func (a *ApiService) Get(url string, headers map[string]string) ([]byte, error) {
+func (a ApiService) Get(url string, headers map[string]string) ([]byte, error) {
 	return a.DoRequestWithOptionalAuth("GET", url, false, headers, nil)
 }
 
-func (a *ApiService) Post(url string, headers map[string]string, body interface{}) ([]byte, error) {
+func (a ApiService) Post(url string, headers map[string]string, body interface{}) ([]byte, error) {
 	return a.DoRequestWithOptionalAuth("POST", url, false, headers, body)
 }
 
-func (a *ApiService) Put(url string, headers map[string]string, body interface{}) ([]byte, error) {
+func (a ApiService) Put(url string, headers map[string]string, body interface{}) ([]byte, error) {
 	return a.DoRequestWithOptionalAuth("PUT", url, false, headers, body)
 }
 
-func (a *ApiService) Delete(url string, headers map[string]string) ([]byte, error) {
+func (a ApiService) Delete(url string, headers map[string]string) ([]byte, error) {
 	return a.DoRequestWithOptionalAuth("DELETE", url, false, headers, nil)
 }
 
-func (a *ApiService) GetWithAuth(url string, headers map[string]string) ([]byte, error) {
+func (a ApiService) GetWithAuth(url string, headers map[string]string) ([]byte, error) {
 	return a.DoRequestWithOptionalAuth("GET", url, true, headers, nil)
 }
 
-func (a *ApiService) PostWithAuth(url string, headers map[string]string, body interface{}) ([]byte, error) {
+func (a ApiService) PostWithAuth(url string, headers map[string]string, body interface{}) ([]byte, error) {
 	return a.DoRequestWithOptionalAuth("POST", url, true, headers, body)
 }
 
-func (a *ApiService) PutWithAuth(url string, headers map[string]string, body interface{}) ([]byte, error) {
+func (a ApiService) PutWithAuth(url string, headers map[string]string, body interface{}) ([]byte, error) {
 	return a.DoRequestWithOptionalAuth("PUT", url, true, headers, body)
 }
 
-func (a *ApiService) DeleteWithAuth(url string, headers map[string]string) ([]byte, error) {
+func (a ApiService) DeleteWithAuth(url string, headers map[string]string) ([]byte, error) {
 	return a.DoRequestWithOptionalAuth("DELETE", url, true, headers, nil)
 }

@@ -19,6 +19,18 @@ func NewHandler(useCases *searchapp.SearchUseCases) *Handler {
 }
 
 // SearchHandler returns all the emails that match the search criteria
+//
+//	@Summary	Search emails
+//	@Schemes
+//	@Description	Search emails by query string
+//	@Tags			Search
+//	@Accept			json
+//	@Produce		json
+//	@Param			query	query		string	true	"Search query"
+//	@Param			page	query		string	false	"Page number"
+//	@Success		200		{object}	corehttp.ResponseModel
+//	@Failure		400		{object}	corehttp.ErrorResponse
+//	@Router			/search [get]
 func (h Handler) SearchHandler(w http.ResponseWriter, r *http.Request) {
 	// Retrieve search criteria from the URL query parameters.
 	query := r.URL.Query().Get("query")

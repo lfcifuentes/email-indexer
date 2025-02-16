@@ -72,7 +72,7 @@
 
 <script setup lang="ts">
 import { defineProps, computed, defineEmits } from 'vue';
-import {Meta, PageLink} from '@/models/pagination';
+import type { Meta, PageLink } from '@/models/pagination';
 
 const props = defineProps<{ meta: Meta }>();
 

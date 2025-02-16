@@ -1,0 +1,124 @@
+basePath: /
+consumes:
+- application/json
+definitions:
+  corehttp.ErrorResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  corehttp.ResponseModel:
+    properties:
+      data: {}
+      message:
+        type: string
+    type: object
+info:
+  contact:
+    email: lfcifuentes28@gmail.com
+    name: Vatia
+  description: This is a email indexer API documentation.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Email Indexer API documentation
+  version: "1.0"
+paths:
+  /refresh:
+    get:
+      consumes:
+      - application/json
+      description: Refresh all emails for all users
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/corehttp.ResponseModel'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/corehttp.ErrorResponse'
+      summary: Refresh all emails for all users
+      tags:
+      - Emails
+  /refresh/{username}:
+    get:
+      consumes:
+      - application/json
+      description: Refresh all emails for a given user
+      parameters:
+      - description: Username
+        in: path
+        name: username
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/corehttp.ResponseModel'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/corehttp.ErrorResponse'
+      summary: Refresh all emails for a given user
+      tags:
+      - Emails
+  /search:
+    get:
+      consumes:
+      - application/json
+      description: Search emails by query string
+      parameters:
+      - description: Search query
+        in: query
+        name: query
+        required: true
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/corehttp.ResponseModel'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/corehttp.ErrorResponse'
+      summary: Search emails
+      tags:
+      - Search
+  /usernames:
+    get:
+      consumes:
+      - application/json
+      description: Get all usernames
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/corehttp.ResponseModel'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/corehttp.ErrorResponse'
+      summary: Get all usernames
+      tags:
+      - Emails
+produces:
+- application/json
+security:
+- Bearer: []
+swagger: "2.0"

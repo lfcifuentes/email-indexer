@@ -52,6 +52,7 @@ func StartServer() {
 		// Exit the application if Zinc service is unavailable.
 		os.Exit(1)
 	}
+
 	// start server
 	slog.Info("Starting server", "event", "starting_server", "port", config.HttpPort)
 	r := router.NewRouter(
@@ -59,6 +60,7 @@ func StartServer() {
 		zinc_server,
 		emailServices,
 	)
+
 	// Start pprof server
 	go func() {
 		slog.Info("Starting pprof server", "port", "6060")

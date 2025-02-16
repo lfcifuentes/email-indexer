@@ -2,10 +2,13 @@ package router
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/go-chi/chi/v5"
 	chi_middleware "github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/render"
+	_ "github.com/lfcifuentes/email-indexer/backend/docs"
+	httpSwagger "github.com/swaggo/http-swagger"
 )
 
 // SetRoutes sets the routes for the router
@@ -24,4 +27,9 @@ func SetBaseRoutes(r *chi.Mux) {
 		render.JSON(w, r, map[string]string{"request_id": reqID})
 		render.Status(r, http.StatusOK)
 	})
+
+	if os.Getenv("APP_ENV") == "development" {
+		// Swagger
+		r.Mount("/swagger", httpSwagger.WrapHandler)
+	}
 }

@@ -10,10 +10,17 @@ import (
 
 const Index string = "test_otro"
 
-// ZincService is a service that interacts with the ZincSearch API.
+// ZincService represents a service for interacting with the Zinc API.
+// It contains the necessary configuration for making API requests.
+//
+// Fields:
+// - apiURL: The base URL of the Zinc API.
+// - apis: An adapter for making API requests.
+// - username: The username for authenticating with the Zinc API.
+// - password: The password for authenticating with the Zinc API.
 type ZincService struct {
 	apiURL   string
-	apis     *api.ApiService
+	apis     api.ApiServiceAdapter
 	username string
 	password string
 }

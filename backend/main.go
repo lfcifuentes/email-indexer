@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"github.com/lfcifuentes/email-indexer/backend/src/core/helpers"
 	"github.com/lfcifuentes/email-indexer/backend/src/http/server"
@@ -22,9 +23,11 @@ import (
 // @Security		Bearer
 // @BasePath		/
 func main() {
-	// Load the environment variables
-	if err := helpers.LoadEnvFile(".env"); err != nil {
-		log.Fatalf("Error loading .env file: %v", err)
+	// Verificar si el archivo .env existe
+	if _, err := os.Stat(".env"); err == nil {
+		if err := helpers.LoadEnvFile(".env"); err != nil {
+			log.Fatalf("Error loading .env file: %v", err)
+		}
 	}
 
 	// Start the api server

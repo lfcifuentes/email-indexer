@@ -40,7 +40,7 @@ func BuildConfigFromEnv() *AppConfig {
 		AppName:               appName,
 		Version:               version,
 		ZincSearchAPIURL:      zincSearchAPIURL,
-		EmailOutputDir:        "../enron_mail_20110402/maildir",
+		EmailOutputDir:        "./enron_mail_20110402/maildir",
 		ZincSearchAuthUser:    authUser,
 		ZincSearchAuthPass:    authPass,
 		HttpPort:              httpPort,

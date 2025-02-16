@@ -8,7 +8,7 @@ import Pagination from '@/components/Pagination.vue';
 import type { Email } from '@/models/email';
 import { getApi } from '@/services/api';
 import { ref } from 'vue';
-import { PageLink } from '@/models/pagination';
+import type { PageLink } from '@/models/pagination';
 import EmailModal from '@/components/EmailModal.vue';
 
 const search = ref('');
@@ -29,8 +29,8 @@ const formHandler = () => {
   searchHandler()
 }
 
-const paginationHandler = (e: PageLink) => {
-  page.value = e.label as number
+const paginationHandler = (payload: { label: number }) => {
+  page.value = payload.label
   searchHandler()
 }
 

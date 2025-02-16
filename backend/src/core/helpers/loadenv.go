@@ -7,7 +7,16 @@ import (
 	"strings"
 )
 
-// LoadEnvFile reads a .env file and sets the environment variables without relying on external packages.
+// LoadEnvFile loads environment variables from a specified file.
+// The file should contain key-value pairs in the format "KEY=VALUE".
+// Lines that are empty or start with a '#' character are ignored as comments.
+// Malformed lines that do not contain an '=' character are logged and skipped.
+//
+// Parameters:
+//   - filename: The path to the file containing the environment variables.
+//
+// Returns:
+//   - error: An error if the file cannot be opened or read, or nil if successful.
 func LoadEnvFile(filename string) error {
 	file, err := os.Open(filename)
 	if err != nil {
