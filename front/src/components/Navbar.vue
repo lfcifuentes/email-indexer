@@ -53,7 +53,6 @@ import { onMounted, ref } from 'vue';
 // menu item list
 const menuItems = ref([
   { name: 'Search', url: '#' },
-  { name: 'Users', url: '#' },
 ]);
 
 const toggleMenu = () => {

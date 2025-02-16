@@ -49,7 +49,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import type { Email } from '@/models/email';
 import { highlightText } from '@/utils/highlight';
 import { parseBodyToHTML } from '@/utils/text';

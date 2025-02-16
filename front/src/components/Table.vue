@@ -13,7 +13,6 @@
       </thead>
       <tbody>
         <template v-for="email in emails" :key="email.id">
-          <!-- Primera fila: información resumida del email -->
           <tr
             class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200"
           >
@@ -38,13 +37,11 @@
               </a>
             </td>
           </tr>
-          <!-- Segunda fila: información adicional o de detalle -->
           <tr
             :id="'item-' + email.message_id"
             class="hidden odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200"
           >
             <td colspan="6" class="px-6 py-4">
-              <!-- Aquí puedes mostrar información extra, por ejemplo, detalles específicos del email -->
               Detalles:
               <br />
               <p

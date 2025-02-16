@@ -17,11 +17,12 @@ export type ErrorResponse = ApiErrorResponse | string | string[];
 // Mapa de mensajes de error comunes
 const ERROR_MESSAGES: Record<string, string> = {
   'Network Error': 'Error de conexión con el servidor',
+  'AxiosError: Network Error': 'Error de conexión con el servidor',
   'Request failed with status code 401': 'No autorizado'
 };
 
 /**
- * normaliza los errores de una respuesta de la API.
+ * Normalice api errors
  * @param err
  * @param defaultText
  * @param returnInArray
@@ -32,12 +33,16 @@ export const normalizeErrors = (
   defaultText = '',
   returnInArray = false,
 ): string | string[] => {
+  console.log('normalizeErrors', err);
   if (typeof err === 'string') {
     return parseErrors(ERROR_MESSAGES[err] || err, returnInArray);
   }
 
   if (Array.isArray(err)) {
-    return parseErrors(err, returnInArray);
+    return parseErrors(
+      err.map(e => ERROR_MESSAGES[e] || e),
+      returnInArray
+    );
   }
 
   // Handle ApiErrorResponse
@@ -45,13 +50,13 @@ export const normalizeErrors = (
                   err?.response?.data?.message ||
                   err?.message ||
                   defaultText;
-
+  console.log('normalizeErrors message', message);
   const normalizedMessage = ERROR_MESSAGES[message as string] || message;
   return parseErrors(normalizedMessage, returnInArray);
 };
 
 /**
- * parsea los errores en un string o un array de strings.
+ * Parse errors to string or array
  * @param errors_array
  * @param returnInArray
  * @param separator

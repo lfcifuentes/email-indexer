@@ -35,7 +35,7 @@
         </div>
         <button
           class="text-blue-600 dark:text-blue-400 font-medium hover:underline cursor-pointer"
-          @click="$emit('viewEmail', { email })"
+          @click="handleEmit(email)"
         >
           View Email Details
         </button>
@@ -58,6 +58,8 @@ const props = defineProps<Props>();
 const emit = defineEmits<{
   (e: 'viewEmail', payload: { email: Email }): void;
 }>();
+
+const handleEmit = (email: Email) => emit('viewEmail', { email });
 
 const highlight = (text: string): string => highlightText(text, props.search);
 </script>
