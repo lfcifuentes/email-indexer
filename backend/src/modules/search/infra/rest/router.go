@@ -10,6 +10,17 @@ import (
 	"github.com/lfcifuentes/email-indexer/backend/src/services/zinc"
 )
 
+// Router defines the search module routes
+// It uses the email services and zinc service to create the use cases
+// Parameters:
+//
+//	router: chi.Mux
+//	emailServices: *email.EmailServices
+//	zincService: *zinc.ZincService
+//
+// Returns:
+//
+//	void
 func Router(router *chi.Mux, emailServices *email.EmailServices, zincService *zinc.ZincService) {
 	useCases := searchapp.NewUseCase(emailServices, zincService)
 	handler := NewHandler(useCases)
@@ -20,8 +31,6 @@ func Router(router *chi.Mux, emailServices *email.EmailServices, zincService *zi
 		})
 		// search emails by request filters
 		r.Get("/", handler.SearchHandler)
-		// get all emails for a given username
-		//r.Get("/user/{id}", handler.SearchHandler)
 	})
 
 }

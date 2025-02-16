@@ -14,6 +14,10 @@ import (
 // The middleware allows the following HTTP methods: GET, POST, PUT, HEAD, OPTIONS, DELETE.
 // It also allows the headers: X-Requested-With and Content-Type.
 //
+// Parameters:
+//
+// next: http.Handler - The next HTTP handler in the chain
+//
 // Usage:
 //
 //	r := chi.NewRouter()

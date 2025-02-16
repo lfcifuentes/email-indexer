@@ -57,18 +57,65 @@ func ResponseErr(err interface{}) ResponseModel {
 	}
 }
 
+// SendSuccess sends a success response with the provided message and data using chi render.
+// The status code is set to 200 OK.
+// The response is formatted as a JSON object with the message and data fields.
+// Parameters:
+//
+//	w: The http.ResponseWriter to write the response to.
+//	r: The http.Request associated with the response.
+//	message: The message to include in the response.
+//	data: The data to include in the response.
+//
+// Example:
+//
+//	{
+//		"message": "Success",
+//		"data": {
+//			"key": "value"
+//		}
+//	}
+//
+// If data is nil, the response will not include the data field.
+// If message is an empty string, the response will not include the message field..
 func SendSuccess(w http.ResponseWriter, r *http.Request, message string, data interface{}) {
 	render.Status(r, http.StatusOK)
 	render.JSON(w, r, ResponseSuccess(message, data))
 }
 
 // SendEmpty sends an empty JSON response with a 200 OK status code using chi render.
+// The status code is set to 200 OK.
+// The response is formatted as a JSON object with the message and data fields.
+// Parameters:
+//	w: The http.ResponseWriter to write the response to.
+//	r: The http.Request associated with the response.
+//
+// Example:
+//	{}
+
 func SendEmpty(w http.ResponseWriter, r *http.Request) {
 	render.Status(r, http.StatusOK)
 	render.JSON(w, r, ResponseEmpty())
 }
 
 // SendError sends an appropriate JSON error response based on the type of error using chi render.
+// The status code is set based on the type of error.
+// The response is formatted as a JSON object with the message field.
+// Parameters:
+//
+//	w: The http.ResponseWriter to write the response to.
+//	r: The http.Request associated with the response.
+//	err: The error to include in the response.
+//
+// Example:
+//
+//	{
+//		"message": "Error message"
+//	}
+//
+// If the error is a coreerrors.UsernamePathNotFound, the status code will be set to 404 Not Found.
+// If the error is a coreerrors.MissingRequiredParameter, the status code will be set to 400 Bad Request.
+// If the error is any other type, the status code will be set to 500 Internal Server Error.
 func SendError(w http.ResponseWriter, r *http.Request, err error) {
 	switch {
 	case errors.As(err, &coreerrors.UsernamePathNotFound{}):

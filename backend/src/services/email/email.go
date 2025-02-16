@@ -14,6 +14,12 @@ type EmailServices struct {
 }
 
 // NewEmailServices creates a new instance of EmailServices.
+//
+// Parameters:
+// - emailsPath: the path to the directory containing the email files.
+//
+// Returns:
+// - a pointer to the EmailServices struct.
 func NewEmailServices(emailsPath string) *EmailServices {
 	return &EmailServices{
 		EmailsPath: emailsPath,
@@ -21,6 +27,10 @@ func NewEmailServices(emailsPath string) *EmailServices {
 }
 
 // getUserFolders returns the list of folder names found in the mail directory.
+//
+// Returns:
+// - a slice of strings containing the folder names.
+// - an error if the directory can't be read.
 func (es *EmailServices) GetUserFolders() ([]string, error) {
 	entries, err := os.ReadDir(es.EmailsPath)
 	if err != nil {
@@ -37,6 +47,13 @@ func (es *EmailServices) GetUserFolders() ([]string, error) {
 }
 
 // processUserFolder processes all email files in a given user folder and returns a slice of Email.
+//
+// Parameters:
+// - folderPath: the path to the user folder.
+//
+// Returns:
+// - a slice of Email.
+// - an error if the folder can't be read.
 func (es *EmailServices) processUserFolder(folderPath string) ([]emaildomain.Email, error) {
 	var emails []emaildomain.Email
 
@@ -62,6 +79,13 @@ func (es *EmailServices) processUserFolder(folderPath string) ([]emaildomain.Ema
 }
 
 // ProcessEmail processes all email files found in the user folder.
+//
+// Parameters:
+// - username: the name of the user folder.
+//
+// Returns:
+// - a slice of Email.
+// - an error if the user folder can't be read.
 func (es *EmailServices) ProcessUserEmails(username string) ([]emaildomain.Email, error) {
 	userFolder := filepath.Join(es.EmailsPath, username)
 	// Check if the user folder exists.
@@ -78,6 +102,10 @@ func (es *EmailServices) ProcessUserEmails(username string) ([]emaildomain.Email
 
 // ProcessEmails processes all emails found in the provided directory.
 // It returns a consolidated slice of Email from all user folders.
+//
+// Returns:
+// - a slice of Email.
+// - an error if the directory can't be read.
 func (es *EmailServices) ProcessAllEmails() ([]emaildomain.Email, error) {
 	users, err := es.GetUserFolders()
 	if err != nil {

@@ -9,11 +9,22 @@ import (
 	"github.com/lfcifuentes/email-indexer/backend/src/services/zinc"
 )
 
+// SearchUseCases is a struct that contains the email and zinc services
 type SearchUseCases struct {
 	EmailServices *email.EmailServices
 	ZincServices  *zinc.ZincService
 }
 
+// NewUseCase creates a new SearchUseCases struct
+// It receives the email services and zinc services
+// It returns a new email use case
+//
+// Parameters:
+//   - emailServices: the email services
+//   - zincServices: the zinc services
+//
+// Returns:
+//   - a new search use case
 func NewUseCase(
 	emailServices *email.EmailServices,
 	zincServices *zinc.ZincService,
@@ -24,13 +35,7 @@ func NewUseCase(
 	}
 }
 
-type SearchResponse struct {
-	Emails   []emaildomain.Email `json:"emails"`
-	Total    int                 `json:"total"`
-	LastPage int                 `json:"last_page"`
-}
-
-func (s SearchUseCases) SearchEmails(query string, page string) (*SearchResponse, error) {
+func (s SearchUseCases) SearchEmails(query string, page string) (*searchdomain.SearchEmailResponse, error) {
 	limit := 20
 	// calculate page start
 	pageStart := 0
@@ -72,7 +77,7 @@ func (s SearchUseCases) SearchEmails(query string, page string) (*SearchResponse
 	// calculate last page
 	lastPage := (zincResults.Hits.Total.Value + limit - 1) / limit
 	// make response
-	response := SearchResponse{
+	response := searchdomain.SearchEmailResponse{
 		Emails:   emails,
 		Total:    zincResults.Hits.Total.Value,
 		LastPage: lastPage,

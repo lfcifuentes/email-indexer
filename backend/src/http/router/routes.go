@@ -12,6 +12,19 @@ import (
 )
 
 // SetRoutes sets the routes for the router
+//
+// Parameters:
+//
+//	r: The chi router
+//
+// Returns:
+//
+//	None
+//
+// Usage:
+//
+//	r := chi.NewRouter()
+//	SetRoutes(r)
 func SetBaseRoutes(r *chi.Mux) {
 	r.Get("/ping", func(w http.ResponseWriter, r *http.Request) {
 		render.JSON(w, r, map[string]string{"message": "pong"})

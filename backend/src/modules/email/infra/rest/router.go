@@ -10,6 +10,17 @@ import (
 	"github.com/lfcifuentes/email-indexer/backend/src/services/zinc"
 )
 
+// Router defines the email module routes
+// It uses the email services and zinc service to create the use cases
+// Parameters:
+//
+//	router: chi.Mux
+//	emailServices: *email.EmailServices
+//	zincService: *zinc.ZincService
+//
+// Returns:
+//
+//	void
 func Router(router *chi.Mux, emailServices *email.EmailServices, zincService *zinc.ZincService) {
 	useCases := emailapp.NewUseCase(emailServices, zincService)
 	handler := NewHandler(useCases)

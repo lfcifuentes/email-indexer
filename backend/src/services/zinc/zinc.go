@@ -26,6 +26,14 @@ type ZincService struct {
 }
 
 // NewZincService creates a new instance of ZincService configured with the provided API URL.
+//
+// Parameters:
+// - apiURL: The base URL of the Zinc API.
+// - authUsername: The username for authenticating with the Zinc API.
+// - authPassword: The password for authenticating with the Zinc API.
+//
+// Returns:
+// - A new instance of ZincService.
 func NewZincService(
 	apiURL string,
 	authUsername string,
@@ -43,6 +51,14 @@ func NewZincService(
 }
 
 // Search sends a search query to the ZincSearch API using the generic ApiService and returns the parsed response.
+//
+// Parameters:
+// - index: The name of the index to search.
+// - searchReq: The search request object.
+//
+// Returns:
+// - The search response object.
+// - An error if the request fails.
 func (z *ZincService) Search(index string, searchReq searchdomain.SearchRequest) (*searchdomain.SearchResponse, error) {
 	// Construct the request URL. Here we assume the search endpoint is "/search".
 	url := fmt.Sprintf("%s/es/%s/_search", z.apiURL, index)

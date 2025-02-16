@@ -8,11 +8,22 @@ import (
 	"github.com/lfcifuentes/email-indexer/backend/src/services/zinc"
 )
 
+// EmailUseCases represents the email use cases
 type EmailUseCases struct {
 	EmailServices *email.EmailServices
 	ZincServices  *zinc.ZincService
 }
 
+// NewUseCase creates a new email use case
+// It receives the email services and zinc services
+// It returns a new email use case
+//
+// Parameters:
+//   - emailServices: the email services
+//   - zincServices: the zinc services
+//
+// Returns:
+//   - a new email use case
 func NewUseCase(
 	emailServices *email.EmailServices,
 	zincServices *zinc.ZincService,
@@ -23,13 +34,20 @@ func NewUseCase(
 	}
 }
 
+// RefreshUserEmails refreshes the user emails
+// It processes the user emails and sends them to zinc
+//
+// Parameters:
+//   - username: the username
+//
+// Returns:
+//   - the number of emails processed
+//   - an error if any
 func (u *EmailUseCases) RefreshUserEmails(username string) (int, error) {
 	data, err := u.EmailServices.ProcessUserEmails(username)
 	if err != nil {
 		return 0, err
 	}
-	// Log start of processing with username and count.
-	// slog.Info("Starting email processing", "event", "start_emails_processed", "username", username, "email_count", len(data))
 
 	// convert data to data []map[string]interface{}
 	convertedData := make([]map[string]interface{}, len(data))
@@ -44,12 +62,14 @@ func (u *EmailUseCases) RefreshUserEmails(username string) (int, error) {
 		return 0, err
 	}
 
-	// Log finish of processing with username and count.
-	// slog.Info("Completed email processing", "event", "end_emails_processed", "username", username, "email_count", len(data))
-
 	return response.RecordCount, nil
 }
 
+// RefreshAllEmails refreshes all the emails
+// It processes all the emails and sends them to zinc
+//
+// Returns:
+//   - an error if any
 func (u *EmailUseCases) RefreshAllEmails() error {
 	// Get the list of users (folders)
 	users, err := u.EmailServices.GetUserFolders()
@@ -97,6 +117,11 @@ func (u *EmailUseCases) RefreshAllEmails() error {
 	return nil
 }
 
+// GetUserNames returns the list of user names found in the mail directory
+//
+// Returns:
+//   - the list of user names
+//   - an error if any
 func (u *EmailUseCases) GetUserNames() ([]string, error) {
 	users, err := u.EmailServices.GetUserFolders()
 	if err != nil {

@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+// AppConfig is a struct that holds the configuration for the application
 type AppConfig struct {
 	AppName               string
 	Version               string
@@ -16,6 +17,8 @@ type AppConfig struct {
 	ServerTearDownTimeOut time.Duration
 }
 
+// BuildConfigFromEnv is a function that reads the configuration from the environment variables
+// and returns an AppConfig struct
 func BuildConfigFromEnv() *AppConfig {
 	appName := os.Getenv("APP_NAME")
 	if appName == "" {

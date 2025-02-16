@@ -18,6 +18,10 @@ import (
 	"github.com/lfcifuentes/email-indexer/backend/src/services/zinc"
 )
 
+// StartServer starts the server
+// It initializes the zinc service, email services and the router
+// It starts the server and listens for incoming connections
+// It handles graceful shutdown by waiting for active connections to finish before stopping the server
 func StartServer() {
 	// load app config
 	config := core.BuildConfigFromEnv()

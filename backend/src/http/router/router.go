@@ -9,6 +9,19 @@ import (
 	"github.com/lfcifuentes/email-indexer/backend/src/services/zinc"
 )
 
+// NewRouter creates a new router
+// It sets the base routes and the email and search routes
+// It returns the chi router
+//
+// Parameters:
+//
+//	port: The port to run the server on
+//	zincService: The zinc service
+//	emailServices: The email services
+//
+// Returns:
+//
+//	*chi.Mux: The chi router
 func NewRouter(
 	port string,
 	zincService *zinc.ZincService,
